@@ -3,6 +3,7 @@
 #' @importFrom minqa newuoa
 #' @importFrom triangle rtriangle
 #' @importFrom grDevices colors
+#' @importFrom kableExtra kbl kable_styling
 #' @importFrom graphics axis box boxplot points hist par abline
 #' @importFrom stats quantile rnorm runif sd
 #' @importFrom utils installed.packages
@@ -63,9 +64,9 @@
 #'
 #' The final solution is to estimate the proportionality constant (\eqn{\alpha}) parameter by iterative solution via univariate (1-dim.) minimization.
 #'
-#' @references Caddy JF (1991). Death rates and time intervals: is there an alternative to the constant natural mortality axiom? Rev Fish Biol Fish 1:109–138. doi: 10.1007/BF00157581.
-#' @references Caddy JF (1996). Modelling natural mortality with age in short-lived invertebrate populations: definition of a strategy of gnomonic time division. Aquat Living Resour 9:197–207. doi: 10.1051/alr:1996023.
-#' @references Martínez-Aguilar S, Arreguín-Sánchez F, Morales-Bojórquez E (2005). Natural mortality and life history stage duration of Pacific sardine (Sardinops caeruleus) based on gnomonic time divisions. Fish Res 71:103–114. doi: 10.1016/j.fishres.2004.04.008.
+#' @references Caddy JF (1991). Death rates and time intervals: is there an alternative to the constant natural mortality axiom? Rev Fish Biol Fish 1:109–138. doi:10.1007/BF00157581.
+#' @references Caddy JF (1996). Modelling natural mortality with age in short-lived invertebrate populations: definition of a strategy of gnomonic time division. Aquat Living Resour 9:197–207. doi:10.1051/alr:1996023.
+#' @references Martínez-Aguilar S, Arreguín-Sánchez F, Morales-Bojórquez E (2005). Natural mortality and life history stage duration of Pacific sardine (Sardinops caeruleus) based on gnomonic time divisions. Fish Res 71:103–114. doi:10.1016/j.fishres.2004.04.008.
 #' @concept gnomonic
 #' @concept natural mortality
 #' @concept fecundity
@@ -82,7 +83,7 @@ NULL
 #' @param addInfo a numeric vector with additional information related to the observed duration of the other gnomonic intervals different than the first interval (egg stage duration). Write \code{addInfo = NULL} if you do not provide additional information.
 #' @param longevity a numeric value indicating the lifespan of the species in days.
 #' @param fecundity a numeric value indicating the mean lifetime fecundity (MLF) as the number of eggs produced for a female.
-#' @param a_init a numeric value indicating the initial parameter related to the proportionality constant which will be optimized.
+#' @param a_init a numeric value indicating the initial parameter related to the proportionality  optimized by iterative solution via univariate (1-dim.) minimization. \code{a_init = 2} as default value.
 #' @return A list of class 'gnomos'.
 #'
 #' \code{a} the proportionality constant.
@@ -116,7 +117,7 @@ NULL
 #' model$results
 #' @export
 gnomonic <- function(nInterval, eggDuration, addInfo = NULL,
-                     longevity, fecundity, a_init){
+                     longevity, fecundity, a_init = 2){
 
 
   if(is.null(addInfo)){
